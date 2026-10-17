@@ -5,6 +5,7 @@ import com.ecommerce.user.dto.UserResponse;
 import com.ecommerce.user.model.User;
 import com.ecommerce.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@RefreshScope
 public class UserController {
 
     @Autowired

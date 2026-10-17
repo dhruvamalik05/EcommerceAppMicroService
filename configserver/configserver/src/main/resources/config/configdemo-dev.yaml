@@ -1,5 +1,0 @@
-build:
-  id: 101
-  version: 1.0.1
-  name: "Native Dev-Build-Notgit"
-  type: "Native Dev-Build"
