@@ -8,7 +8,7 @@ spring:
       server:
         native:
           search-locations:
-            - file:///C:\Users\dhruv\Java\configserver\configserver\src\main\resources\config
+            - file:///C:\Users\dhruv\Java\EcommerceAppMicroService\configserver\configserver\src\main\resources\config
   rabbitmq:
     host: localhost
     port: 5672
@@ -20,31 +20,6 @@ management:
     web:
       exposure:
         include: "*"
-
-  #  cloud:
-  #    config:
-  #      server:
-  #        git:
-  #          uri: https://github.com/dhruvamalik05/app-configuration
-  #          username: dhruvamalik05
-  #          password: ${SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD}
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/configdb
-#    username: dhruvamalik05
-#    password: dhruvamalik05
-#    driver-class-name: org.postgresql.Driver
-#  cloud:
-#    config:
-#      server:
-#        jdbc:
-#          sql: "SELECT PROP_KEY, PROP_VALUE FROM PUBLIC.PROPERTIES WHERE APPLICATION = ? AND PROFILE = ? AND LABEL = ?"
-#          default-label: main
-#  jpa:
-#    database: POSTGRESQL
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: 8888
