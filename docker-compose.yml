@@ -1,0 +1,57 @@
+services:
+#  mysql:
+#    image: mysql:latest
+#    container_name: mysql-container
+#    environment:
+#      MYSQL_DATABASE: ecomdb
+#      MYSQL_USER: dhruvamalik05
+#      MYSQL_PASSWORD: dhruvamalik05
+#      MYSQL_ROOT_PASSWORD: dhruvamalik05
+#    ports:
+#      - "3307:3306"
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#    restart: unless-stopped
+#
+#  phpmyadmin:
+
+  postgres:
+    image: postgres:14
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: dhruvamalik05
+      POSTGRES_PASSWORD: dhruvamalik05
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-dhruvamalik05@gmail.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-dhruvamalik05}
+#      PGADMIN_DEFAULT_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5051:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
+
+#volumes:
+#  mysql_data:

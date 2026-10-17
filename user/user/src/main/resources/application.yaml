@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: user-service
+  mongodb:
+    database: userdb
+    uri: mongodb+srv://malikdhruva5_db_user:l14e0wIOd6OCCcm1@usercluster.vzxxin0.mongodb.net/?appName=UserCluster
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/userdb
+#    username: dhruvamalik05
+#    password: dhruvamalik05
+#  jpa:
+#    database: POSTGRESQL
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:test
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+
+server:
+  port: 8082
+
+#MONGO USERNAME: malikdhruva5_db_user
+#MONGO_PASSWORD: l14e0wIOd6OCCcm1

@@ -1,0 +1,24 @@
+#spring:
+#  application:
+#    name: configdemo
+##  profiles:
+##    active: prod
+##  config:
+##    import: optional:configserver:http://localhost:8888
+
+build:
+  id: 100
+  version: 1.0.0
+  name: "Native Default-Build-Notgit"
+  type: "Native Default-Build"
+
+#build:
+#  id: ${BUILD_ID}
+#  version: ${BUILD_VERSION}
+#  name: ${BUILD_NAME}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
