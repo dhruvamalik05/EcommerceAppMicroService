@@ -45,6 +45,20 @@ services:
       - postgres
     restart: unless-stopped
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: my-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    networks:
+      - postgres
+
+
 networks:
   postgres:
     driver: bridge
@@ -52,6 +66,7 @@ networks:
 volumes:
   postgres:
   pgadmin:
+  rabbitmq:
 
 #volumes:
 #  mysql_data:
