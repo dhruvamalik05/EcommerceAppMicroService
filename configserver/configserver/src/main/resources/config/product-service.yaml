@@ -23,6 +23,17 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint: { shutdown: { enabled: true } }
+
+eureka:
+  client:
+    serverUrl:
+      defaultZone: "https://localhost:8761"
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
 #  h2:
 #    console:
 #      enabled: true
