@@ -12,7 +12,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/orders")
-@RefreshScope
+@RefreshScope 
 public class OrderController {
 
     private final OrderService orderservice;

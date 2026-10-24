@@ -2,7 +2,6 @@ package com.ecommerce.product.controller;
 
 import com.ecommerce.product.dto.ProductRequest;
 import com.ecommerce.product.dto.ProductResponse;
-import com.ecommerce.product.model.Product;
 import com.ecommerce.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -19,10 +18,6 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productservice;
-//
-//    public ProductController(ProductService productservice) {
-//        this.productservice = productservice;
-//    }
 
     @PostMapping
     public ResponseEntity<Optional<ProductResponse>> createProduct (@RequestBody ProductRequest productRequest) {
@@ -49,6 +44,13 @@ public class ProductController {
 
         List<Optional<ProductResponse>> productResponse = productservice.getProduct();
         return ResponseEntity.ok(productResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getProductById (@PathVariable Long id) {
+
+        Optional<ProductResponse> productResponse = productservice.getProductById(id);
+        return productResponse.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")

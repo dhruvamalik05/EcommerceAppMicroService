@@ -20,13 +20,13 @@ public class CartController {
     private final CartService cartservice;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addToCart (@RequestHeader("X-User-ID") String userId,
-                                                 @RequestBody CartItemRequest cartItemRequest) {
+    public ResponseEntity<String> addToCart (@RequestHeader("X-User-ID") String userId,
+                                             @RequestBody CartItemRequest cartItemRequest) {
         boolean added = cartservice.addToCart(userId, cartItemRequest);
         if (!added) {
-            ResponseEntity.badRequest().body("Product out of stock or product not found or user not found");
+            return ResponseEntity.badRequest().body("Product out of stock or product not found or user not found");
         }
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok().body("Successfully added to cart");
     }
 
     @DeleteMapping("/{productId}")
