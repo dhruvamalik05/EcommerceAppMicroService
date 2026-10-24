@@ -92,7 +92,6 @@ public class CartService {
         return false;
 
     }
-
     public List<CartItem> getCart(String userId) {
 //        Optional<User> userOpt = userRepository.findById(Long.valueOf(userId));
 //        if (userOpt.isEmpty()) {
