@@ -25,6 +25,12 @@ management:
         include: "*"
   endpoint: { shutdown: { enabled: true } }
 
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+
+
 eureka:
   client:
     serverUrl:
@@ -37,7 +43,7 @@ eureka:
 logging:
   level:
     root: INFO
-    com.ecommerce.user: TRACE
+    com.ecommerce.product: TRACE
   file:
     name:
       logs/${spring.application.name}.log

@@ -78,6 +78,11 @@
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.zipkin.reporter2</groupId>
+			<artifactId>zipkin-sender-urlconnection</artifactId>
+		</dependency>
+
 		<!-- Zipkin Reporter using Brave -->
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
