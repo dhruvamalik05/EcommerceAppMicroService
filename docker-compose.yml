@@ -58,6 +58,14 @@ services:
     networks:
       - postgres
 
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
+    networks:
+      - postgres
 
 networks:
   postgres:
@@ -67,6 +75,7 @@ volumes:
   postgres:
   pgadmin:
   rabbitmq:
+  zipkin:
 
 #volumes:
 #  mysql_data:
