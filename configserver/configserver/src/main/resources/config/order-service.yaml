@@ -9,15 +9,6 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#  h2:
-#    console:
-#      enabled: true
-#  datasource:
-#    url: jdbc:h2:mem:test
-#  jpa:
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update
   rabbitmq:
     host: localhost
     port: 5672
@@ -31,6 +22,13 @@ management:
         include: "*"
   endpoint: { shutdown: { enabled: true } }
 
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
 eureka:
   client:
     serverUrl:
@@ -40,7 +38,16 @@ eureka:
   instance:
     prefer-ip-address: true
 
+logging:
+  level:
+    root: INFO
+    com.ecommerce.order: TRACE
+  file:
+    name: logs/${spring.application.name}.log
+  logback:
+    rolling policy:
+      max-file-size: 10MB
+      max-history: 7
+
 server:
   port: 8083
-
-
