@@ -58,6 +58,15 @@ services:
     networks:
       - postgres
 
+  redis:
+    image: redis:7.4-alpine
+    container_name: redis_cache
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - postgres
+
 networks:
   postgres:
     driver: bridge
@@ -66,6 +75,7 @@ volumes:
   postgres:
   pgadmin:
   rabbitmq:
+
 
 #volumes:
 #  mysql_data:

@@ -20,7 +20,13 @@ management:
     web:
       exposure:
         include: "*"
-  endpoint: { shutdown: { enabled: true } }
+  endpoint:
+    shutdown: { enabled: true }
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
 
   tracing:
     sampling:
@@ -51,3 +57,32 @@ logging:
 
 server:
   port: 8083
+
+#circuit breaker config
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slidingWindowType: COUNT_BASED
+  retry:
+    instances:
+      retryBreaker:
+        maxAttempts: 1
+        waitDuration: 500ms
+
+
+  ratelimiter:
+    instances:
+      retryLimiter:
+        timeout-duration: 0
+        limit-refresh-period: 4s
+        limit-for-period: 2
+
