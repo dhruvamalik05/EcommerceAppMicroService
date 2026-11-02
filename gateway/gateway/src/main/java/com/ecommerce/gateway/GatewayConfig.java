@@ -31,7 +31,7 @@ public class GatewayConfig {
                 .route(
                         "user-service",
                         r -> r.path("/api/users/**")
-                                .filters(f-> f.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter()).setKeyResolver(hostnameKeyResolver())))
+//                                .filters(f-> f.requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter()).setKeyResolver(hostnameKeyResolver())))
                                 .uri("lb://USER-SERVICE"))
                 .route(
                         "order-service",
