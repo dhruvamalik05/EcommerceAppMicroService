@@ -15,6 +15,15 @@ spring:
     username: user
     password: password
 
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    name: order.tracking
+
+
 management:
   endpoints:
     web:
