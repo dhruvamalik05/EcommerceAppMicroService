@@ -67,6 +67,63 @@ services:
     networks:
       - postgres
 
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - postgres
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      # Connects Kafka to the ZooKeeper container on port 2181
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+      # Exposes Kafka to your host machine (localhost:9092)
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+
+      KAFKA_BROKER_ID: 1
+      # Required minimum settings for a single-node configuration
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+#      KAFKA_PROCESS_ROLES: BROKER, CONTROLLER
+    depends_on:
+      - zookeeper
+    networks:
+      - postgres
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-server
+    command: start-dev
+    environment:
+      # Keycloak 26+ bootstrap credentials
+      KC_BOOTSTRAP_ADMIN_USERNAME: dhruvamalik05
+      KC_BOOTSTRAP_ADMIN_PASSWORD: dhruvamalik05
+#      # Database Link settings
+#      KC_DB: postgres
+#      KC_DB_URL_HOST: postgres
+#      KC_DB_URL_DATABASE: keycloak
+#      KC_DB_USERNAME: keycloak
+#      KC_DB_PASSWORD: password123
+#      # Dev Settings
+#      KC_LOG_LEVEL: info
+    ports:
+      - "8443:8080"
+#    depends_on:
+#      - postgres
+    networks:
+      - postgres
+
 networks:
   postgres:
     driver: bridge
@@ -75,6 +132,7 @@ volumes:
   postgres:
   pgadmin:
   rabbitmq:
+  keycloak:
 
 
 #volumes:

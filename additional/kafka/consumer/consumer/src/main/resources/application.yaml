@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: consumer
+
+  cloud:
+    stream:
+      function:
+        definition: processRiderLocation
+      bindings:
+        processRiderLocation-in-0:
+          destination: my-topic-new
+          group: rider-location-consumers
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+server:
+  port: 8086

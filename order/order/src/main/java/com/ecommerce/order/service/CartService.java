@@ -15,12 +15,14 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,6 +34,7 @@ public class CartService {
     private final CartItemRepositry cartItemRepositry;
     private final ProductServiceClient productServiceClient;
     private final UserServiceClient userServiceClient;
+    private final RabbitTemplate rabbitTemplate;
 //    int attempts = 1;
 //    @CircuitBreaker(name="productService", fallbackMethod = "addToCartFallback")
 //    @Retry(name="retryBreaker", fallbackMethod = "addToCartFallback")
@@ -72,6 +75,9 @@ public class CartService {
 //            cartItem.setPrice(BigDecimal.valueOf(10000000));
             cartItemRepositry.save(cartItem);
         }
+
+        rabbitTemplate.convertAndSend("order.exchange", "order.tracking",
+                Map.of("orderId", cartItemRequest.getProductId() , "status", "Added to Cart"));
 
         return true;
 
